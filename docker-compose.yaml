@@ -9,30 +9,21 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: tasks
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password  # Should be done via env
     ports:
       - '3306:3306'
-    healthcheck:
-      test: ["CMD", "true"]
-      interval: 30s
-      timeout: 5s
-      retries: 5
-  rabbitmq:
+  rabbitmq:  # Should have non-default credentials
     image: rabbitmq
     container_name: 'rabbitmq'
     ports:
       - 5672:5672
       - 15672:15672
-    healthcheck:
-      test: ["CMD", "nc", "-z", "localhost:5672"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-  # app:
-  #   image: task-manager
-  #   ports:
-  #     - 3000:3000
-  #   restart: unless-stopped
-  #   depends_on:
-  #     - db
-  #     - rabbitmq
+  app:
+    image: task-manager
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    entrypoint: yarn start:docker
+    depends_on:
+      - db
+      - rabbitmq

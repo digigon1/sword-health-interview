@@ -4,6 +4,4 @@ WORKDIR /app
 
 COPY . .
 
-CMD [ "yarn", "start" ]
-
 EXPOSE 3000
