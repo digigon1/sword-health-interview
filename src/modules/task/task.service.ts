@@ -16,8 +16,9 @@ export class TaskService {
     public async get(id: Task["id"]): Promise<Task> {
         // Get task from DB
         const dbTask = await this.databaseService.select(Table.Tasks, { id })
-        if (!dbTask.length) {  // Length = 0
-            throw new NotFoundError()  // Task does not exist
+        if (!dbTask.length) {
+            // Length = 0
+            throw new NotFoundError() // Task does not exist
         }
 
         return dbTask[0]

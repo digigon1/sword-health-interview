@@ -26,7 +26,8 @@ export class NotificationService {
 
     public async sendTaskCompleteNotification(user: User, task: Task) {
         // Check if we have a channel cached...
-        if (!this.channels[ChannelTypes.SEND_TASK_COMPLETE]) {  // ...if we don't, create one and store it
+        if (!this.channels[ChannelTypes.SEND_TASK_COMPLETE]) {
+            // ...if we don't, create one and store it
             // Await connection
             const conn = await this.queueConnection
 

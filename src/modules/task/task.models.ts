@@ -8,7 +8,7 @@ export class Task {
     public userId: number
 
     @IsString()
-    @Length(0, 2500)  // Checks for task max length
+    @Length(0, 2500) // Checks for task max length
     public summary: string
 
     @IsOptional()
@@ -30,7 +30,7 @@ export class Task {
 
 export class CreateTaskDTO {
     @IsString()
-    @Length(0, 2500)  // Checks for task max length
+    @Length(0, 2500) // Checks for task max length
     public summary: Task["summary"]
 
     public constructor(input: CreateTaskDTO = {} as CreateTaskDTO) {
@@ -40,7 +40,7 @@ export class CreateTaskDTO {
 
 export class UpdateTaskDTO {
     @IsString()
-    @Length(0, 2500)  // Checks for task max length
+    @Length(0, 2500) // Checks for task max length
     public summary: Task["summary"]
 
     public constructor(input: UpdateTaskDTO = {} as UpdateTaskDTO) {

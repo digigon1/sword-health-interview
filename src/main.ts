@@ -1,10 +1,10 @@
 import { ValidationPipe } from "@nestjs/common"
-import { NestFactory } from "@nestjs/core"
+import * as core from "@nestjs/core"
 import { AppModule } from "./app.module"
 
 async function bootstrap() {
     // Create app
-    const app = await NestFactory.create(AppModule)
+    const app = await core.NestFactory.create(AppModule)
 
     // Add validation based on class-validator
     app.useGlobalPipes(new ValidationPipe())

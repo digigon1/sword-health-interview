@@ -42,6 +42,9 @@ describe("Modules > Task > Models", () => {
             let createTask = new CreateTaskDTO(input)
             expect(createTask).toEqual(input)
             expect(validateSync(createTask).length).toBe(0)
+
+            const emptyCreateTask = new CreateTaskDTO()
+            expect(emptyCreateTask).toBeInstanceOf(CreateTaskDTO)
         })
 
         // Sad
@@ -64,6 +67,9 @@ describe("Modules > Task > Models", () => {
             let createTask = new UpdateTaskDTO(input)
             expect(createTask).toEqual(input)
             expect(validateSync(createTask).length).toBe(0)
+
+            const emptyUpdateTask = new UpdateTaskDTO()
+            expect(emptyUpdateTask).toBeInstanceOf(UpdateTaskDTO)
         })
 
         // Sad

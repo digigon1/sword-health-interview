@@ -36,6 +36,9 @@ describe("Modules > User > Models", () => {
             const createUser = new CreateUserDTO(input)
             expect(createUser).toEqual(input)
             expect(validateSync(createUser).length).toBe(0)
+
+            const emptyCreateUser = new CreateUserDTO()
+            expect(emptyCreateUser).toBeInstanceOf(CreateUserDTO)
         })
 
         // Sad

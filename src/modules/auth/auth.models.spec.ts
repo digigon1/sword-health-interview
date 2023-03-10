@@ -11,6 +11,9 @@ describe("Modules > Auth > Models", () => {
             const loginDto = new LoginDto(input)
             expect(loginDto).toEqual(input)
             expect(validateSync(loginDto).length).toBe(0)
+
+            const emptyLoginDto = new LoginDto()
+            expect(emptyLoginDto).toBeInstanceOf(LoginDto)
         })
     })
 })

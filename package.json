@@ -9,7 +9,6 @@
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
-    "start:docker": "yarn migrate && yarn start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -22,7 +21,11 @@
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
     "migrate:down": "knex migrate:down",
-    "docker:build": "docker build -t task-manager ."
+    "docker:build": "docker build -t task-manager .",
+    "entrypoint": "yarn migrate && yarn start",
+
+    "start:bootstrap": "yarn && yarn docker:build && docker-compose up",
+    "start:consumer": "yarn && DB_HOST=localhost AMQP_HOST=localhost node mq-consumer/mq-consumer.js"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",

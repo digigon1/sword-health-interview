@@ -1,6 +1,7 @@
 import {
     ConflictException,
     ForbiddenException,
+    InternalServerErrorException,
     NotFoundException,
 } from "@nestjs/common"
 import { Request } from "express"
@@ -137,6 +138,19 @@ describe("Modules > Task > Controllers", () => {
                     NotFoundException,
                 )
             })
+
+            it("fails if other error", async () => {
+                mockTaskService.delete.mockRejectedValueOnce(new Error())
+                const controller = new TaskController(
+                    mockTaskService as unknown as TaskService,
+                    mockAuthService as unknown as AuthService,
+                )
+                const mockTaskID = 1
+
+                await expect(controller.deleteTask(mockTaskID)).rejects.toThrow(
+                    InternalServerErrorException,
+                )
+            })
         })
 
         describe("updateTaskSummary", () => {
@@ -200,6 +214,23 @@ describe("Modules > Task > Controllers", () => {
                         mockRequest,
                     ),
                 ).rejects.toThrow(ForbiddenException)
+            })
+
+            it("fails if other error", async () => {
+                // Setup
+                mockTaskService.changeSummary.mockRejectedValueOnce(new Error())
+                const controller = new TaskController(
+                    mockTaskService as unknown as TaskService,
+                    mockAuthService as unknown as AuthService,
+                )
+
+                await expect(
+                    controller.updateTaskSummary(
+                        1,
+                        { summary: "summary" },
+                        mockRequest,
+                    ),
+                ).rejects.toThrow(InternalServerErrorException)
             })
         })
 
@@ -270,6 +301,19 @@ describe("Modules > Task > Controllers", () => {
                 await expect(
                     controller.completeTask(1, mockRequest),
                 ).rejects.toThrow(ConflictException)
+            })
+
+            it("fails if other error", async () => {
+                // Setup
+                mockTaskService.complete.mockRejectedValueOnce(new Error())
+                const controller = new TaskController(
+                    mockTaskService as unknown as TaskService,
+                    mockAuthService as unknown as AuthService,
+                )
+
+                await expect(
+                    controller.completeTask(1, mockRequest),
+                ).rejects.toThrow(InternalServerErrorException)
             })
         })
     })

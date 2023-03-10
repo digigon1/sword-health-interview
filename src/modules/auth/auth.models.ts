@@ -12,7 +12,8 @@ export class LoginDto {
     @IsString()
     public password: string
 
-    public constructor(input: LoginDto = {} as LoginDto) {  // Default arg for NestJS ValidationPipe
+    public constructor(input: LoginDto = {} as LoginDto) {
+        // Default arg for NestJS ValidationPipe
         this.username = input.username
 
         this.password = input.password

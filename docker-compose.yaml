@@ -23,7 +23,7 @@ services:
     ports:
       - 3000:3000
     restart: unless-stopped
-    entrypoint: yarn start:docker
+    entrypoint: yarn entrypoint
     depends_on:
       - db
       - rabbitmq

@@ -100,6 +100,25 @@ describe("Modules > Task > Service", () => {
                 expect(tasks).toHaveLength(1)
                 expect(tasks[0]).toEqual(mockTask)
             })
+
+            it("gets all tasks for single user", async () => {
+                // Setup
+                const mockTask = new Task({
+                    id: 1,
+                    userId: 1,
+                    summary: "summary",
+                })
+                mockDatabaseService.select.mockResolvedValueOnce([mockTask])
+                const taskService = new TaskService(
+                    mockDatabaseService as unknown as DatabaseService,
+                    mockNotificationService as unknown as NotificationService,
+                )
+
+                const tasks = await taskService.getAll(1)
+
+                expect(tasks).toHaveLength(1)
+                expect(tasks[0]).toEqual(mockTask)
+            })
         })
 
         describe("delete", () => {

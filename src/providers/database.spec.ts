@@ -11,7 +11,7 @@ const knex = {
     delete: jest.fn(() => knex),
 }
 jest.mock("knex", () => ({
-    knex: () => knex
+    knex: () => knex,
 }))
 
 describe("Providers > Database", () => {

@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: Sword Health
+  description: No description
+  version: 1.0.0
+paths:
+  /user:
+    post:
+      summary: Create User
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+              role:
+                type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Invalid request
+  /auth/login:
+    post:
+      summary: Login
+      parameters:
+        - in: body
+          name: body
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Invalid login
+  /task:
+    post:
+      summary: Create Task
+      parameters:
+        - in: body
+          name: summary
+          schema:
+            type: object
+            properties:
+              summary:
+                type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Summary too long
+    get:
+      summary: List All Tasks
+      parameters: []
+      responses:
+        '200':
+          description: OK
+  /task/:id/summary:
+    patch:
+      summary: Update Task Summary
+      parameters:
+        - in: body
+          name: summary
+          schema:
+            type: object
+            properties:
+              summary:
+                type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Task does not exist
+        '403':
+          description: User does not have permission to access task
+        '400':
+          description: Summary too long
+  /task/:id/complete:
+    post:
+      summary: Complete Task
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Task does not exist
+        '403':
+          description: User does not have permission to access task
+        '409':
+          description: Task was already completed
+        '400':
+          description: Summary too long
+  /task/:id:
+    delete:
+      summary: Delete Task
+      parameters: []
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: User is not manager

@@ -8,6 +8,9 @@ import { UserModule } from "./modules/user/user.module"
     imports: [
         // Imports env
         ConfigModule.forRoot({ isGlobal: true }),
-        TaskModule, UserModule, AuthModule],
+        TaskModule,
+        UserModule,
+        AuthModule,
+    ],
 })
 export class AppModule {}

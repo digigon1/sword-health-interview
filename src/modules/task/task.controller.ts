@@ -71,12 +71,13 @@ export class TaskController {
             return await this.taskService.delete(id)
         } catch (e) {
             // Handle known errors
-            if (e instanceof NotFoundError) {  // 404
+            if (e instanceof NotFoundError) {
+                // 404
                 throw new NotFoundException()
             }
 
             // Handle unknown errors
-            throw new InternalServerErrorException()  // 500
+            throw new InternalServerErrorException() // 500
         }
     }
 
@@ -101,16 +102,18 @@ export class TaskController {
             return result
         } catch (e) {
             // Handle known errors
-            if (e instanceof NotFoundError) {  // 404
+            if (e instanceof NotFoundError) {
+                // 404
                 throw new NotFoundException()
             }
 
-            if (e instanceof ForbiddenError) {  // 403, happens if user does not have access to the task
+            if (e instanceof ForbiddenError) {
+                // 403, happens if user does not have access to the task
                 throw new ForbiddenException()
             }
 
             // Handle unknown errors
-            throw new InternalServerErrorException()  // 500
+            throw new InternalServerErrorException() // 500
         }
     }
 
@@ -130,20 +133,23 @@ export class TaskController {
             return result
         } catch (e) {
             // Handle known errors
-            if (e instanceof NotFoundError) {  // 404
+            if (e instanceof NotFoundError) {
+                // 404
                 throw new NotFoundException()
             }
 
-            if (e instanceof ForbiddenError) {  // 403, happens if user does not have access to the task
+            if (e instanceof ForbiddenError) {
+                // 403, happens if user does not have access to the task
                 throw new ForbiddenException()
             }
 
-            if (e instanceof TaskCompletedError) {  // 409, happens if task is already completed
+            if (e instanceof TaskCompletedError) {
+                // 409, happens if task is already completed
                 throw new ConflictException()
             }
 
             // Handle unknown errors
-            throw new InternalServerErrorException()  // 500
+            throw new InternalServerErrorException() // 500
         }
     }
 }
